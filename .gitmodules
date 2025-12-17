@@ -1,0 +1,12 @@
+[submodule "axerabin"]
+	path = axerabin
+	url = https://github.com/dianjixz/axerabin
+	branch = main
+[submodule "linux"]
+	path = linux
+	url = https://github.com/scpcom/linux
+	branch = nanokvmpro-4.19.y
+[submodule "u-boot"]
+	path = u-boot
+	url = https://github.com/scpcom/u-boot
+	branch = nanokvmpro-2020.04
