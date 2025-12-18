@@ -11,6 +11,8 @@ installpkgs(){
   apt-get install -y ninja-build tcl
   apt-get install -y dosfstools file mtools
   apt-get install -y fuse2fs shellcheck
+
+  apt-get install -y python3
 }
 
 isadmin=`whoami`

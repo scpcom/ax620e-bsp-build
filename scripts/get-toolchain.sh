@@ -13,7 +13,7 @@ if [ ! -e $TOOLCHAIN_ROOT/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin 
   cd - > /dev/null
 
   mkdir -p $TOOLCHAIN_ROOT
-  sudo tar -xvf gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu.tar.xz -C $TOOLCHAIN_ROOT/
+  tar -xvf $DOWNLOAD_PATH/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu.tar.xz -C $TOOLCHAIN_ROOT/
 fi
 fi
 
@@ -27,7 +27,7 @@ if [ ! -e $TOOLCHAIN_ROOT/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/bin 
   cd - > /dev/null
 
   mkdir -p $TOOLCHAIN_ROOT
-  sudo tar -xvf $DOWNLOAD_PATH/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu.tar.xz  -C $TOOLCHAIN_ROOT/
+  tar -xvf $DOWNLOAD_PATH/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu.tar.xz  -C $TOOLCHAIN_ROOT/
 fi
 
 echo OK
