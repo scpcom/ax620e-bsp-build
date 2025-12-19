@@ -6,8 +6,13 @@ UBOOT_BIN=$1
 UIP_BIN=uboot.bin
 UIP_MAX_SIZE=1572864
 
+UEP_BIN=env.bin
+UEP_MAX_SIZE=1048576
+
 [ "X${UBOOT_BIN}" != "X" ] || UBOOT_BIN=${PACK_OUTPUT_DIR}/u-boot/u-boot.bin
+[ "X${UBOOT_ENV}" != "X" ] || UBOOT_ENV=${PACK_OUTPUT_DIR}/u-boot/u-boot-initial-env
 [ -e ${PACK_OUTPUT_DIR}/u-boot.bin ] || cp -p ${UBOOT_BIN} ${PACK_OUTPUT_DIR}/u-boot.bin
+[ -e ${PACK_OUTPUT_DIR}/u-boot-initial-env ] || cp -p ${UBOOT_ENV} ${PACK_OUTPUT_DIR}/u-boot-initial-env
 [ -e ${PACK_OUTPUT_DIR}/private.pem ] || cp -p ${GERNERAL_BIN}/imgsign/private.pem ${PACK_OUTPUT_DIR}/private.pem
 [ -e ${PACK_OUTPUT_DIR}/public.pem ] || cp -p ${GERNERAL_BIN}/imgsign/public.pem ${PACK_OUTPUT_DIR}/public.pem
 
@@ -22,5 +27,9 @@ python3 ${GERNERAL_BIN}/imgsign/sec_boot_AX620E_sign.py -i ${PACK_OUTPUT_DIR}/u-
 
 dd if=/dev/zero bs=${UIP_MAX_SIZE} count=1 | tr '\000' '\377' > ${PACK_INSTALL_DIR}/${UIP_BIN}.tmp
 dd if=${PACK_INSTALL_DIR}/${UIP_BIN} of=${PACK_INSTALL_DIR}/${UIP_BIN}.tmp bs=${UIP_MAX_SIZE} count=1 conv=notrunc seek=0
+
+mkenvimage -s 0x20000 -o ${PACK_INSTALL_DIR}/${UEP_BIN} ${PACK_OUTPUT_DIR}/u-boot-initial-env
+
+mkenvimage -s ${UEP_MAX_SIZE} -o ${PACK_INSTALL_DIR}/${UEP_BIN}.tmp ${PACK_OUTPUT_DIR}/u-boot-initial-env
 
 echo OK
