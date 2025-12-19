@@ -45,6 +45,7 @@ bs=${BUILDDIR}/sdk-output-stamp
 if [ ! -e $bs ]; then
   echo "\n${green}Packing Image for ${BOARD_DTS}${end_color}\n"
   cp -p ${BUILDDIR}/install/${BOARD_DTS}/*.bin* ${BUILDDIR}/install/${BOARD_DTS}/*.img* /output/
+  cp -p ${BUILDDIR}/install/${BOARD_DTS}/*.tar* /output/
   echo "\n${green}Image for ${BOARD_DTS} is ${BOARD_DTS}.img.xz${end_color}\n"
   touch $bs
 fi
