@@ -43,4 +43,6 @@ cd - > /dev/null
 mkdir -p ${PACK_INSTALL_DIR}/ko
 find ${KERNEL_OUTPUT_DIR}/ko -name '*.ko' -exec cp -f -p {} ${PACK_INSTALL_DIR}/ko/ \;
 
+fakeroot tar -C ${PACK_INSTALL_DIR} -czvf ${PACK_INSTALL_DIR}/${BOARD_DTS}-ko.tar.gz ko
+
 echo OK
