@@ -32,4 +32,6 @@ mkenvimage -s 0x20000 -o ${PACK_INSTALL_DIR}/${UEP_BIN} ${PACK_OUTPUT_DIR}/u-boo
 
 mkenvimage -s ${UEP_MAX_SIZE} -o ${PACK_INSTALL_DIR}/${UEP_BIN}.tmp ${PACK_OUTPUT_DIR}/u-boot-initial-env
 
+chmod ugo+r ${PACK_INSTALL_DIR}/${UEP_BIN}*
+
 echo OK
