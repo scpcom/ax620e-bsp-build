@@ -1,17 +1,12 @@
 #!/bin/sh -e
-BOARD_DTS=nanokvm_pro_arm64_k419
+. ./scripts/envsetup_pack.sh
 
-PACK_OUTPUT_DIR=`pwd`/build/${BOARD_DTS}
-PACK_INSTALL_DIR=`pwd`/install/${BOARD_DTS}
-
-#GERNERAL_BIN=`pwd`/general_bin_ax630c
-GERNERAL_BIN=`pwd`/axerabin/tools/bin
 KERNEL_BIN=$1
 
 KIP_BIN=kernel.img
 KIP_MAX_SIZE=67108864
 
-[ "X${KERNEL_BIN}" != "X" ] || KERNEL_BIN=${PACK_OUTPUT_DIR}/linux/arch/arm64/boot/Image
+[ "X${KERNEL_BIN}" != "X" ] || KERNEL_BIN=${PACK_OUTPUT_DIR}/linux/arch/${KERNEL_ARCH}/boot/Image
 [ -e ${PACK_OUTPUT_DIR}/linux.bin ] || cp -p ${KERNEL_BIN} ${PACK_OUTPUT_DIR}/linux.bin
 [ -e ${PACK_OUTPUT_DIR}/private.pem ] || cp -p ${GERNERAL_BIN}/imgsign/private.pem ${PACK_OUTPUT_DIR}/private.pem
 [ -e ${PACK_OUTPUT_DIR}/public.pem ] || cp -p ${GERNERAL_BIN}/imgsign/public.pem ${PACK_OUTPUT_DIR}/public.pem

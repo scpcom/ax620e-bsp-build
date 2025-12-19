@@ -1,7 +1,5 @@
 #!/bin/sh -e
-BOARD_DTS=nanokvm_pro_arm64_k419
-
-PACK_INSTALL_DIR=`pwd`/install/${BOARD_DTS}
+. ./scripts/envsetup_pack.sh
 
 ./scripts/get-toolchain.sh
 
