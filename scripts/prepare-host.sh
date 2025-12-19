@@ -9,7 +9,7 @@ installpkgs(){
   apt-get install -y build-essential cmake fakeroot git pkg-config rsync unzip wget zip
   apt-get install -y bc bison flex liblzma-dev libncurses-dev libssl-dev device-tree-compiler
   apt-get install -y ninja-build tcl
-  apt-get install -y dosfstools file mtools
+  apt-get install -y dosfstools file mtools u-boot-tools
   apt-get install -y fuse2fs shellcheck
 
   apt-get install -y python3
