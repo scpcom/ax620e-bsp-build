@@ -9,7 +9,7 @@ RUN apt-get update \
         build-essential cmake fakeroot git pkg-config rsync unzip wget zip \
         bc bison flex liblzma-dev libncurses-dev libssl-dev device-tree-compiler \
         ninja-build tcl \
-        dosfstools file mtools \
+        dosfstools file mtools u-boot-tools \
         fuse2fs shellcheck \
         python3
 
