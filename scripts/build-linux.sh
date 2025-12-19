@@ -20,6 +20,11 @@ export PATH=$TOOLCHAIN_ROOT/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/bi
 
 # Remove + from kernel version
 cd linux
+if [ -e $PACK_INSTALL_DIR/initramfs_rootfs.cpio ]; then
+  sed -i 's|^CONFIG_INITRAMFS_SOURCE=.*|CONFIG_INITRAMFS_SOURCE="../../../install/'${BOARD_DTS}'/initramfs_rootfs.cpio"|g' arch/${ARCH}/configs/${KERNEL_CFG}
+else
+  sed -i 's|^CONFIG_INITRAMFS_SOURCE=.*|CONFIG_INITRAMFS_SOURCE=""|g' arch/${ARCH}/configs/${KERNEL_CFG}
+fi
 sed -i s/'echo "+"'/'echo ""'/g scripts/setlocalversion
 cd - > /dev/null
 
@@ -31,6 +36,7 @@ make -C linux ARCH=${ARCH} CROSS_COMPILE=$CROSS_COMPILE O=$KERNEL_OUTPUT_DIR mod
 #make -C linux ARCH=${ARCH} CROSS_COMPILE=$CROSS_COMPILE O=$KERNEL_OUTPUT_DIR -j `nproc` bindeb-pkg
 
 cd linux
+git restore arch/${ARCH}/configs/${KERNEL_CFG}
 git restore scripts/setlocalversion
 cd - > /dev/null
 
