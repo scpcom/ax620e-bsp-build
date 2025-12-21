@@ -55,7 +55,7 @@ dd if=/dev/mmcblk0p14 of=kernel.bin bs=4096
 dd if=/dev/mmcblk0p12 of=dtb.bin bs=4096
 ```
 
-## insall our bsp binaries
+## install our bsp binaries
 
 ```
 dd if=uboot.bin.tmp of=/dev/mmcblk0p5 bs=4096
