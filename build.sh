@@ -25,6 +25,8 @@ fi
 ./scripts/build-u-boot.sh
 ./scripts/build-linux.sh
 
+[ ! -e ${PACK_OUTPUT_DIR}/atf.bin ] || ./scripts/ax_pack_bin.sh atf.bin atf.img 262144
+
 ./scripts/ax_pack_uboot.sh
 ./scripts/ax_pack_linux.sh
 ./scripts/ax_pack_dtb.sh
