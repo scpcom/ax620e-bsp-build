@@ -44,6 +44,7 @@ Replace the IP 192.168.1.234 with the address of your NanoKVM-Pro.
 
 ```
 scp -p install/nanokvm_pro_arm64_k419/*.tmp root@192.168.1.234:/root/
+scp -p install/nanokvm_pro_arm64_k419/nanokvm_pro_arm64_k419-ko.tar.gz root@192.168.1.234:/root/
 ssh root@192.168.1.234
 ```
 
@@ -53,6 +54,8 @@ ssh root@192.168.1.234
 dd if=/dev/mmcblk0p5 of=uboot.bin bs=4096
 dd if=/dev/mmcblk0p14 of=kernel.bin bs=4096
 dd if=/dev/mmcblk0p12 of=dtb.bin bs=4096
+tar -C /kvmcomm -czvf kvmcomm-ko.tar.gz ko
+tar -C /soc -czvf soc-ko.tar.gz ko
 ```
 
 ## install our bsp binaries
@@ -61,6 +64,10 @@ dd if=/dev/mmcblk0p12 of=dtb.bin bs=4096
 dd if=uboot.bin.tmp of=/dev/mmcblk0p5 bs=4096
 dd if=kernel.img.tmp of=/dev/mmcblk0p14 bs=4096
 dd if=dtb.img.tmp of=/dev/mmcblk0p12 bs=4096
+tar xzvf nanokvm_pro_arm64_k419-ko.tar.gz
+cp -p ko/fbtft.ko /kvmcomm/ko/
+cp -p ko/fb_jd9853.ko /kvmcomm/ko/
+cp -p ko/aic8800_*.ko /soc/ko/
 ```
 
 ## restore original binaries
