@@ -5,7 +5,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get install -y eatmydata \
     && eatmydata apt-get install -y --no-install-recommends \
-        ca-certificates cpio xxd \
+        bsdextrautils ca-certificates cpio xxd \
         build-essential cmake fakeroot git pkg-config rsync unzip wget zip \
         bc bison flex liblzma-dev libncurses-dev libssl-dev device-tree-compiler \
         ninja-build tcl \
