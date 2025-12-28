@@ -23,6 +23,7 @@ fi
 ./scripts/get-toolchain.sh
 
 ./scripts/build-u-boot.sh
+#./scripts/build-ramfs.sh
 ./scripts/build-linux.sh
 
 [ ! -e ${PACK_OUTPUT_DIR}/atf.bin     ] || ./scripts/ax_pack_bin.sh atf.bin atf.img 262144
