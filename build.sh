@@ -28,6 +28,7 @@ fi
 [ ! -e ${PACK_OUTPUT_DIR}/atf.bin     ] || ./scripts/ax_pack_bin.sh atf.bin atf.img 262144
 [ ! -e ${PACK_OUTPUT_DIR}/optee.bin   ] || ./scripts/ax_pack_bin.sh optee.bin optee.img 1048576
 
+[ ! -e ${PACK_OUTPUT_DIR}/fdl.bin     ] || ./scripts/ax_sign_bin.sh fdl.bin boot.bin 262144
 [ ! -e ${PACK_OUTPUT_DIR}/ddrinit.bin ] || ./scripts/ax_sign_bin.sh ddrinit.bin ddrinit.img 524288
 [ ! -e ${PACK_OUTPUT_DIR}/spl.bin     ] || ./scripts/ax_sign_bin.sh spl.bin spl.img 786432
 
