@@ -71,6 +71,7 @@ for blkimg in $blkimgs ; do
   o=${m}M
   [ $n != $p ] || n=${n}_b
   [ $k = $s ] || o=${k}K
+  [ "-" != $p ] || echo "blkdevparts=mmcblk0:"
   echo "${o}(${n})"
   cat $f >> ${LIP_IMAGE_FILE}
   p=$n
