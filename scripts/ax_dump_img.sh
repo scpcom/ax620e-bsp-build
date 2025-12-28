@@ -19,10 +19,16 @@ blkdevparts="
 64M(kernel)
 64M(kernel_b)"
 
+if [ -e ./scripts/envsetup_pack.sh ]; then
+  . ./scripts/envsetup_pack.sh
+fi
+
 [ "X$image" != "X" ] || exit 1
 [ -e $image ] || exit 1
 
-base=$(dirname $image)/$(basename $image | cut -d '.' -f 1)
+base=$(dirname $image)
+[ "X$base" = "X" ] || base=$base/
+base=$base$(basename $image | cut -d '.' -f 1)
 loader=$base-loader.bin
 
 o=0
@@ -95,5 +101,28 @@ for part in $blkdevparts ; do
       rm -f $g.unsigned*
     fi
   fi
+  if echo $n | grep -q -E '^kernel' ; then
+    if [ -e ./scripts/repack-zImage.sh ]; then
+      ./scripts/repack-zImage.sh -u $f.unpacked
+
+      cp -p $f.unpacked_unpacked/initramfs.cpio $f.initramfs_rootfs.cpio
+      rm -rf $f.unpacked_unpacked/
+    fi
+  fi
   o=$(($o + k))
 done
+
+if [ "X${PACK_OUTPUT_DIR}" != "X" -a "X${PACK_INSTALL_DIR}" != "X" ]; then
+  DUMP_OUTPUT_DIR=$base-dump
+  mkdir -p ${PACK_OUTPUT_DIR}
+  [ ! -e ${DUMP_OUTPUT_DIR}/boot.bin.unpacked ] || cp -p ${DUMP_OUTPUT_DIR}/boot.bin.unpacked ${PACK_OUTPUT_DIR}/fdl.bin
+  cp -p ${DUMP_OUTPUT_DIR}/atf.bin.unpacked ${PACK_OUTPUT_DIR}/atf.bin
+  cp -p ${DUMP_OUTPUT_DIR}/optee.bin.unpacked ${PACK_OUTPUT_DIR}/optee.bin
+  cp -p ${DUMP_OUTPUT_DIR}/spl.bin.unpacked ${PACK_OUTPUT_DIR}/spl.bin
+  cp -p ${DUMP_OUTPUT_DIR}/logo.bin.unpacked ${PACK_OUTPUT_DIR}/logo.bmp
+  cp -p ${DUMP_OUTPUT_DIR}/ddrinit.bin.unpacked ${PACK_OUTPUT_DIR}/ddrinit.bin
+  mkdir -p ${PACK_INSTALL_DIR}
+  cp -p ${DUMP_OUTPUT_DIR}/kernel.bin.initramfs_rootfs.cpio ${PACK_INSTALL_DIR}/initramfs_rootfs.cpio
+fi
+
+echo OK
