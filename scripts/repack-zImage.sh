@@ -771,6 +771,14 @@ while getopts xv12345sgrpuhtz-: argv; do
 done
 shift $((OPTIND-1))
 zImage="${1:-zImage}"
+if [ "X$(dirname ${zImage})" != "X" ]; then
+  if echo ${zImage} | grep -q -E '^\.' ; then
+    cur_dir=${cur_dir}/$(dirname ${zImage})
+  else
+    cur_dir=$(dirname ${zImage})
+  fi
+  zImage=$(basename ${zImage})
+fi
 unpacked="$cur_dir/${zImage}_unpacked"
 packing="$cur_dir/${zImage}_packing"
 shift
@@ -782,7 +790,7 @@ if [ -n "$opt_z" ]; then
     buildZImageTar "$zImage"
 fi
 if [ -n "$opt_u" ]; then
-    [ -f "$zImage" ] || fatal "file '$zImage': not found"
+    [ -f "$cur_dir/$zImage" ] || fatal "file '$zImage': not found"
     unpack
 fi
 if [ -n "$opt_p" ]; then
