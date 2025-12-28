@@ -67,6 +67,8 @@ dd if=dtb.img.tmp of=/dev/mmcblk0p12 bs=4096
 tar xzvf nanokvm_pro_arm64_k419-ko.tar.gz
 cp -p ko/fbtft.ko /kvmcomm/ko/
 cp -p ko/fb_jd9853.ko /kvmcomm/ko/
+cp -p ko/gpio_keys.ko /kvmcomm/ko/
+cp -p ko/rotary_encoder.ko /kvmcomm/ko/
 cp -p ko/aic8800_*.ko /soc/ko/
 ```
 
