@@ -17,7 +17,8 @@ blkdevparts="
 1M(dtb)
 1M(dtb_b)
 64M(kernel)
-64M(kernel_b)"
+64M(kernel_b)
+128M(boot)"
 
 if [ -e ./scripts/envsetup_pack.sh ]; then
   . ./scripts/envsetup_pack.sh
@@ -44,7 +45,9 @@ for part in $blkdevparts ; do
 done
 
 echo 0 $o $(basename $loader)
-if file $image | grep -q 'XZ compressed' ; then
+if [ -e $loader ]; then
+  true
+elif file $image | grep -q 'XZ compressed' ; then
   xz -cd $image | dd of=$loader bs=1024 count=$o
 else
   dd if=$image of=$loader bs=1024 count=$o
@@ -64,8 +67,12 @@ for part in $blkdevparts ; do
   fi
   echo $o $k $n.bin
   f=$base-dump/$n.bin
-  dd if=$loader of=$f bs=1024 skip=$o count=$k | true
-  if echo $n | grep -q -E '^env|^logo' ; then
+  if [ -e $f.unpacked ]; then
+    o=$(($o + k))
+    continue
+  fi
+  dd if=$loader of=$f bs=1024 skip=$o count=$k
+  if echo $n | grep -q -E '^boot|^env|^logo' ; then
     if file $f | grep -q 'PC bitmap' ; then
       a=$(hexdump -s 2 -n 4 -e '"%d"' $f)
       b=$(($k * 1024))
