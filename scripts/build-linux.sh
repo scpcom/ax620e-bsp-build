@@ -5,14 +5,16 @@ KERNEL_OUTPUT_DIR=$PACK_OUTPUT_DIR/linux
 KERNEL_CFG=m5stack_AX630C_emmc_arm64_k419_defconfig
 [ "${BOARD_DTS}" != "nanokvm_pro_arm64_k419" ] || KERNEL_CFG=nanokvm_pro_emmc_arm64_k419_defconfig
 
-# Remove + from kernel version
 cd linux
 if [ -e $PACK_INSTALL_DIR/initramfs_rootfs.cpio ]; then
   sed -i 's|^CONFIG_INITRAMFS_SOURCE=.*|CONFIG_INITRAMFS_SOURCE="../../../install/'${BOARD_DTS}'/initramfs_rootfs.cpio"|g' arch/${KERNEL_ARCH}/configs/${KERNEL_CFG}
 else
   sed -i 's|^CONFIG_INITRAMFS_SOURCE=.*|CONFIG_INITRAMFS_SOURCE=""|g' arch/${KERNEL_ARCH}/configs/${KERNEL_CFG}
 fi
+# Remove + from kernel version
 sed -i s/'echo "+"'/'echo ""'/g scripts/setlocalversion
+# Keep sublevel at 125
+sed -i s/'^SUBLEVEL = .*'/'SUBLEVEL = 125'/g Makefile
 cd - > /dev/null
 
 #make -C linux distclean
@@ -25,6 +27,7 @@ make -C linux ARCH=${KERNEL_ARCH} CROSS_COMPILE=$CROSS_COMPILE O=$KERNEL_OUTPUT_
 cd linux
 git restore arch/${KERNEL_ARCH}/configs/${KERNEL_CFG}
 git restore scripts/setlocalversion
+git restore Makefile
 cd - > /dev/null
 
 mkdir -p ${PACK_INSTALL_DIR}/ko
