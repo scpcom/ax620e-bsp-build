@@ -38,10 +38,13 @@ mkdir -p ${PACK_INSTALL_DIR}
 [ ! -e ${PACK_OUTPUT_DIR}/atf.bin     ] || ./scripts/ax_pack_bin.sh atf.bin atf.img 262144
 [ ! -e ${PACK_OUTPUT_DIR}/optee.bin   ] || ./scripts/ax_pack_bin.sh optee.bin optee.img 1048576
 
-[ ! -e ${PACK_OUTPUT_DIR}/fdl.bin     ] || ./scripts/ax_sign_bin.sh fdl.bin boot.bin 262144
+[ ! -e ${PACK_OUTPUT_DIR}/fdl-sd.bin  ] || ./scripts/ax_sign_bin.sh fdl-sd.bin boot.bin 262144
+[ ! -e ${PACK_OUTPUT_DIR}/fdl.bin     ] || ./scripts/ax_sign_bin.sh fdl.bin fdl.bin 92160
+[ ! -e ${PACK_OUTPUT_DIR}/fdl2.bin    ] || ./scripts/ax_sign_bin.sh fdl2.bin fdl2.bin -
 [ ! -e ${PACK_OUTPUT_DIR}/ddrinit.bin ] || ./scripts/ax_sign_bin.sh ddrinit.bin ddrinit.img 524288
 [ ! -e ${PACK_OUTPUT_DIR}/spl.bin     ] || ./scripts/ax_sign_bin.sh spl.bin spl.img 786432
 
+[ ! -e ${PACK_OUTPUT_DIR}/eip_ax620e.bin ] || ./scripts/ax_copy_bin.sh eip_ax620e.bin eip.bin -
 [ ! -e ${PACK_OUTPUT_DIR}/logo.bmp    ] || ./scripts/ax_copy_bin.sh logo.bmp logo.img 6291456
 
 ./scripts/ax_pack_uboot.sh
