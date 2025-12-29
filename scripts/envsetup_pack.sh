@@ -9,6 +9,8 @@ TOOLCHAIN_ROOT=`pwd`/toolchain
 PACK_OUTPUT_DIR=`pwd`/build/${BOARD_DTS}
 PACK_INSTALL_DIR=`pwd`/install/${BOARD_DTS}
 
+BOARD_BIN=`pwd`/axerabin/ax630c
+BOARD_FW=`pwd`/axerabin/firmware
 #GERNERAL_BIN=`pwd`/general_bin_ax630c
 GERNERAL_BIN=`pwd`/axerabin/tools/bin
 

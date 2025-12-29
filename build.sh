@@ -20,6 +20,15 @@ if [ "$AX_BOARD_LINK" != "$BOARD_DTS" ]; then
   . ./scripts/envsetup_pack.sh
 fi
 
+mkdir -p ${PACK_OUTPUT_DIR}
+for f in ${BOARD_BIN}/*.bin ${BOARD_BIN}/*.bmp ; do
+  [ -e $f ] || continue
+  cp -p $f ${PACK_OUTPUT_DIR}/
+done
+
+mkdir -p ${PACK_INSTALL_DIR}
+[ ! -e ${BOARD_FW}/ax630c_initramfs_rootfs.cpio ] ||  cp -p ${BOARD_FW}/ax630c_initramfs_rootfs.cpio ${PACK_INSTALL_DIR}/initramfs_rootfs.cpio
+
 ./scripts/get-toolchain.sh
 
 ./scripts/build-u-boot.sh
