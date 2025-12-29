@@ -20,7 +20,11 @@ mkdir -p $PACK_INSTALL_DIR
 
 cp -p ${PACK_OUTPUT_DIR}/${INPUT_BIN} ${PACK_INSTALL_DIR}/${PACKED_BIN}
 
-dd if=/dev/zero bs=${PACKED_MAX_SIZE} count=1 | tr '\000' '\377' > ${PACK_INSTALL_DIR}/${PACKED_BIN}.tmp
-dd if=${PACK_INSTALL_DIR}/${PACKED_BIN} of=${PACK_INSTALL_DIR}/${PACKED_BIN}.tmp bs=${PACKED_MAX_SIZE} count=1 conv=notrunc seek=0
+if [ "${PACKED_MAX_SIZE}" = "-" ]; then
+  dd if=${PACK_INSTALL_DIR}/${PACKED_BIN} of=${PACK_INSTALL_DIR}/${PACKED_BIN}.tmp conv=notrunc
+else
+  dd if=/dev/zero bs=${PACKED_MAX_SIZE} count=1 | tr '\000' '\377' > ${PACK_INSTALL_DIR}/${PACKED_BIN}.tmp
+  dd if=${PACK_INSTALL_DIR}/${PACKED_BIN} of=${PACK_INSTALL_DIR}/${PACKED_BIN}.tmp bs=${PACKED_MAX_SIZE} count=1 conv=notrunc seek=0
+fi
 
 echo OK
