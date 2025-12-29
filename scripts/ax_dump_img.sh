@@ -65,6 +65,7 @@ for part in $blkdevparts ; do
   else
     k=$(echo $s | sed s/'K$'/''/g)
   fi
+  [ "$n" != "boot" ] || n=bootfs
   echo $o $k $n.bin
   f=$base-dump/$n.bin
   if [ -e $f.unpacked ]; then
