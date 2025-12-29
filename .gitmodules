@@ -1,7 +1,7 @@
 [submodule "axerabin"]
 	path = axerabin
-	url = https://github.com/dianjixz/axerabin
-	branch = main
+	url = https://github.com/scpcom/axerabin
+	branch = nanokvmpro
 [submodule "linux"]
 	path = linux
 	url = https://github.com/scpcom/linux
