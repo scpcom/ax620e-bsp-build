@@ -14,8 +14,10 @@ BOARD_FW=`pwd`/axerabin/firmware
 #GERNERAL_BIN=`pwd`/general_bin_ax630c
 GERNERAL_BIN=`pwd`/axerabin/tools/bin
 
+#CROSS_COMPILE_PATH=$TOOLCHAIN_ROOT/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu
 #CROSS_COMPILE=aarch64-linux-gnu-
-#export PATH=$TOOLCHAIN_ROOT/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin:$PATH
 
+CROSS_COMPILE_PATH=$TOOLCHAIN_ROOT/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu
 CROSS_COMPILE=aarch64-none-linux-gnu-
-export PATH=$TOOLCHAIN_ROOT/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/bin:$PATH
+
+export PATH=$CROSS_COMPILE_PATH/bin:$PATH
