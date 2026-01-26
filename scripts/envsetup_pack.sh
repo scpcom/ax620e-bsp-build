@@ -1,5 +1,6 @@
 #BOARD_DTS=m5stack-ax630c-module-llm
 #BOARD_DTS=m5stack-ax630c-lite
+#BOARD_DTS=maixcam2_arm64_k419
 BOARD_DTS=nanokvm_pro_arm64_k419
 
 UBOOT_ARCH=arm
