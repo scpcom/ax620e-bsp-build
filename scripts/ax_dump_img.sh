@@ -49,6 +49,8 @@ if [ -e $loader ]; then
   true
 elif file $image | grep -q 'XZ compressed' ; then
   xz -cd $image | dd of=$loader bs=1024 count=$o
+elif file $image | grep -q 'LZ4 compressed' ; then
+  lz4 -cd $image | dd of=$loader bs=1024 count=$o
 else
   dd if=$image of=$loader bs=1024 count=$o
 fi
