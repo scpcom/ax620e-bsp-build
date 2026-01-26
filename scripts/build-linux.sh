@@ -3,6 +3,7 @@
 
 KERNEL_OUTPUT_DIR=$PACK_OUTPUT_DIR/linux
 KERNEL_CFG=m5stack_AX630C_emmc_arm64_k419_defconfig
+[ "${BOARD_DTS}" != "maixcam2_arm64_k419" ] || KERNEL_CFG=maixcam2_emmc_arm64_k419_defconfig
 [ "${BOARD_DTS}" != "nanokvm_pro_arm64_k419" ] || KERNEL_CFG=nanokvm_pro_emmc_arm64_k419_defconfig
 
 if [ "X$1" = "Xclean" ]; then
