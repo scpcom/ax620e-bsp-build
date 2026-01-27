@@ -5,6 +5,7 @@ IN_FILE=$1
 IN_FW=$2
 PACKED_BIN=$3
 PACKED_MAX_SIZE=$4
+EXTRA_PARAM=$5
 
 [ "X${IN_FILE}" != "X" ] || exit 1
 [ "X${IN_FW}" != "X" ] || exit 1
@@ -24,7 +25,7 @@ mkdir -p $PACK_INSTALL_DIR
 
 python3 ${GERNERAL_BIN}/imgsign/spl_AX620E_sign.py -i ${PACK_OUTPUT_DIR}/${INPUT_BIN} -fw ${PACK_OUTPUT_DIR}/${INPUT_FW} \
 	 -pub ${PACK_OUTPUT_DIR}/public.pem \
-	 -prv ${PACK_OUTPUT_DIR}/private.pem -cap 0x54FAFE -key_bit 2048 -o ${PACK_INSTALL_DIR}/${PACKED_BIN}
+	 -prv ${PACK_OUTPUT_DIR}/private.pem -cap 0x54FAFE -key_bit 2048 -o ${PACK_INSTALL_DIR}/${PACKED_BIN} $EXTRA_PARAM
 
 if [ "${PACKED_MAX_SIZE}" = "-" ]; then
   dd if=${PACK_INSTALL_DIR}/${PACKED_BIN} of=${PACK_INSTALL_DIR}/${PACKED_BIN}.tmp conv=notrunc
