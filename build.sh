@@ -39,7 +39,7 @@ mkdir -p ${PACK_INSTALL_DIR}
 [ ! -e ${PACK_OUTPUT_DIR}/optee.bin   ] || ./scripts/ax_pack_bin.sh optee.bin optee.img 1048576
 
 [ ! -e ${PACK_OUTPUT_DIR}/fdl-sd.bin  ] || ./scripts/ax_sign_spl.sh fdl-sd.bin fw.bin boot.bin 262144 -sd_fat
-[ ! -e ${PACK_OUTPUT_DIR}/fdl.bin     ] || ./scripts/ax_sign_bin.sh fdl.bin fdl.bin 92160
+[ ! -e ${PACK_OUTPUT_DIR}/fdl.bin     ] || ./scripts/ax_sign_fdl.sh fdl.bin fw.bin fdl.bin 92160
 [ ! -e ${PACK_OUTPUT_DIR}/fdl2.bin    ] || ./scripts/ax_sign_bin.sh fdl2.bin fdl2.bin -
 [ ! -e ${PACK_OUTPUT_DIR}/ddrinit.bin ] || ./scripts/ax_sign_bin.sh ddrinit.bin ddrinit.img 524288
 [ ! -e ${PACK_OUTPUT_DIR}/spl.bin     ] || ./scripts/ax_sign_spl.sh spl.bin fw.bin spl.img 786432
