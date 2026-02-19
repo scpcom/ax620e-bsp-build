@@ -17,6 +17,14 @@ done
 
 if [ "$AX_BOARD_LINK" != "$BOARD_DTS" ]; then
   sed -i s/'^BOARD_DTS=.*'/'BOARD_DTS='$AX_BOARD_LINK/g  ./scripts/envsetup_pack.sh
+  if  echo $AX_BOARD_LINK | grep -q -i ax620q_ ; then
+    sed -i s/'^BOARD_CHIP=.*'/'BOARD_CHIP='ax620q/g  ./scripts/envsetup_pack.sh
+  fi
+  if  echo $AX_BOARD_LINK | grep -q _arm32_ ; then
+    sed -i s/'^KERNEL_ARCH=.*'/'KERNEL_ARCH='arm/g  ./scripts/envsetup_pack.sh
+    sed -i 's|^CROSS_COMPILE_PATH=.*|CROSS_COMPILE_PATH=''$TOOLCHAIN_ROOT/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf|g'  ./scripts/envsetup_pack.sh
+    sed -i s/'^CROSS_COMPILE=.*'/'CROSS_COMPILE=''arm-none-linux-gnueabihf-'/g  ./scripts/envsetup_pack.sh
+  fi
   . ./scripts/envsetup_pack.sh
 fi
 
@@ -27,7 +35,7 @@ for f in ${BOARD_BIN}/*.bin ${BOARD_BIN}/*.bmp ; do
 done
 
 mkdir -p ${PACK_INSTALL_DIR}
-[ ! -e ${BOARD_FW}/ax630c_initramfs_rootfs.cpio ] ||  cp -p ${BOARD_FW}/ax630c_initramfs_rootfs.cpio ${PACK_INSTALL_DIR}/initramfs_rootfs.cpio
+[ ! -e ${BOARD_FW}/${BOARD_CHIP}_initramfs_rootfs.cpio ] ||  cp -p ${BOARD_FW}/${BOARD_CHIP}_initramfs_rootfs.cpio ${PACK_INSTALL_DIR}/initramfs_rootfs.cpio
 
 ./scripts/get-toolchain.sh
 
