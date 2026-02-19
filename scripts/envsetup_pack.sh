@@ -1,3 +1,5 @@
+BOARD_CHIP=ax630c
+
 #BOARD_DTS=m5stack-ax630c-module-llm
 #BOARD_DTS=m5stack-ax630c-lite
 #BOARD_DTS=maixcam2_arm64_k419
@@ -10,7 +12,7 @@ TOOLCHAIN_ROOT=`pwd`/toolchain
 PACK_OUTPUT_DIR=`pwd`/build/${BOARD_DTS}
 PACK_INSTALL_DIR=`pwd`/install/${BOARD_DTS}
 
-BOARD_BIN=`pwd`/axerabin/ax630c
+BOARD_BIN=`pwd`/axerabin/${BOARD_CHIP}
 BOARD_FW=`pwd`/axerabin/firmware
 #GERNERAL_BIN=`pwd`/general_bin_ax630c
 GERNERAL_BIN=`pwd`/axerabin/tools/bin
