@@ -4,6 +4,7 @@
 UBOOT_OUTPUT_DIR=$PACK_OUTPUT_DIR/u-boot
 
 BOARD_CFG=AX630C_m5stack_LLM_module_defconfig
+[ ! -e u-boot/configs/${BOARD_DTS}_defconfig ] || BOARD_CFG=${BOARD_DTS}_defconfig
 [ "${BOARD_DTS}" != "m5stack-ax630c-lite" ] || BOARD_CFG=AX630C_m5stack_LITE_defconfig
 [ "${BOARD_DTS}" != "maixcam2_arm64_k419" ] || BOARD_CFG=maixcam2_defconfig
 [ "${BOARD_DTS}" != "nanokvm_pro_arm64_k419" ] || BOARD_CFG=nanokvm_pro_defconfig
