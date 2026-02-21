@@ -25,6 +25,9 @@ if [ "$AX_BOARD_LINK" != "$BOARD_DTS" ]; then
     sed -i 's|^CROSS_COMPILE_PATH=.*|CROSS_COMPILE_PATH=''$TOOLCHAIN_ROOT/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf|g'  ./scripts/envsetup_pack.sh
     sed -i s/'^CROSS_COMPILE=.*'/'CROSS_COMPILE=''arm-none-linux-gnueabihf-'/g  ./scripts/envsetup_pack.sh
   fi
+  if  echo $AX_BOARD_LINK | grep -q -i nand_ ; then
+    sed -i s/'^BOARD_FAMILY=.*'/'BOARD_FAMILY='ax620e_Qnand/g  ./scripts/envsetup_pack.sh
+  fi
   . ./scripts/envsetup_pack.sh
 fi
 
