@@ -1,4 +1,5 @@
 BOARD_CHIP=ax630c
+BOARD_FAMILY=ax620e_emmc
 
 #BOARD_DTS=m5stack-ax630c-module-llm
 #BOARD_DTS=m5stack-ax630c-lite
