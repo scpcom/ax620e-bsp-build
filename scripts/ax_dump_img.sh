@@ -2,24 +2,6 @@
 GERNERAL_BIN=`pwd`/axerabin/tools/bin
 image=$1
 
-blkdevparts="
-768K(spl)
-512K(ddrinit)
-256K(atf)
-256K(atf_b)
-1536K(uboot)
-1536K(uboot_b)
-1M(env)
-6M(logo)
-6M(logo_b)
-1M(optee)
-1M(optee_b)
-1M(dtb)
-1M(dtb_b)
-64M(kernel)
-64M(kernel_b)
-128M(boot)"
-
 if [ -e ./scripts/envsetup_pack.sh ]; then
   . ./scripts/envsetup_pack.sh
 fi
