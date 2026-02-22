@@ -2,13 +2,18 @@
 . ./scripts/envsetup_pack.sh
 
 UBOOT_BIN=$1
+UIP_MAX_SIZE=$2
+UBOOT_ENV=$3
+UEP_MAX_SIZE=$4
 
 UIP_BIN=uboot.bin
-UIP_MAX_SIZE=1572864
+[ "X${UIP_MAX_SIZE}" != "X" ] || UIP_MAX_SIZE=1572864
 
 UEP_BIN=env.bin
-UEP_MAX_SIZE=1048576
+[ "X${UEP_MAX_SIZE}" != "X" ] || UEP_MAX_SIZE=1048576
 
+[ "X${UBOOT_BIN}" = "X" ] || UBOOT_BIN=${PACK_OUTPUT_DIR}/u-boot/${UBOOT_BIN}
+[ "X${UBOOT_ENV}" = "X" ] || UBOOT_ENV=${PACK_OUTPUT_DIR}/u-boot/${UBOOT_ENV}
 [ "X${UBOOT_BIN}" != "X" ] || UBOOT_BIN=${PACK_OUTPUT_DIR}/u-boot/u-boot.bin
 [ "X${UBOOT_ENV}" != "X" ] || UBOOT_ENV=${PACK_OUTPUT_DIR}/u-boot/u-boot-initial-env
 [ -e ${PACK_OUTPUT_DIR}/u-boot.bin ] || cp -p ${UBOOT_BIN} ${PACK_OUTPUT_DIR}/u-boot.bin
