@@ -2,10 +2,12 @@
 . ./scripts/envsetup_pack.sh
 
 KERNEL_BIN=$1
+KIP_MAX_SIZE=$2
 
 KIP_BIN=kernel.img
-KIP_MAX_SIZE=67108864
+[ "X${KIP_MAX_SIZE}" != "X" ] || KIP_MAX_SIZE=67108864
 
+[ "X${KERNEL_BIN}" = "X" ] || KERNEL_BIN=${PACK_OUTPUT_DIR}/linux/arch/${KERNEL_ARCH}/boot/${KERNEL_BIN}
 [ "X${KERNEL_BIN}" != "X" ] || KERNEL_BIN=${PACK_OUTPUT_DIR}/linux/arch/${KERNEL_ARCH}/boot/Image
 [ -e ${PACK_OUTPUT_DIR}/linux.bin ] || cp -p ${KERNEL_BIN} ${PACK_OUTPUT_DIR}/linux.bin
 [ -e ${PACK_OUTPUT_DIR}/private.pem ] || cp -p ${GERNERAL_BIN}/imgsign/private.pem ${PACK_OUTPUT_DIR}/private.pem
