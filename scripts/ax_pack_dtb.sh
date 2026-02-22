@@ -2,14 +2,16 @@
 . ./scripts/envsetup_pack.sh
 
 DEVICETREE_BIN=$1
+DTP_MAX_SIZE=$2
 
+[ "X${DEVICETREE_BIN}" = "X" ] || DEVICETREE_BIN=${PACK_OUTPUT_DIR}/linux/arch/${KERNEL_ARCH}/boot/dts/axera/${DEVICETREE_BIN}
 [ "X${DEVICETREE_BIN}" != "X" ] || DEVICETREE_BIN=${PACK_OUTPUT_DIR}/linux/arch/${KERNEL_ARCH}/boot/dts/axera/${BOARD_DTS}.dtb
 [ -e ${PACK_OUTPUT_DIR}/fdt.bin ] || cp -p ${DEVICETREE_BIN} ${PACK_OUTPUT_DIR}/fdt.bin
 [ -e ${PACK_OUTPUT_DIR}/private.pem ] || cp -p ${GERNERAL_BIN}/imgsign/private.pem ${PACK_OUTPUT_DIR}/private.pem
 [ -e ${PACK_OUTPUT_DIR}/public.pem ] || cp -p ${GERNERAL_BIN}/imgsign/public.pem ${PACK_OUTPUT_DIR}/public.pem
 
 DTP_BIN=dtb.img
-DTP_MAX_SIZE=1048576
+[ "X${DTP_MAX_SIZE}" != "X" ] || DTP_MAX_SIZE=1048576
 
 mkdir -p $PACK_INSTALL_DIR
 
