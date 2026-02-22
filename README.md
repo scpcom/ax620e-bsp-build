@@ -1,6 +1,6 @@
 # AX620E BSP Build
 
-Builds u-boot and linux kernel for Axera AX620E/AX630C based boards such as NanoKVM-Pro.
+Builds u-boot and linux kernel for Axera AX620Q/AX630C based boards such as NanoKVM-Pro.
 
 # Compiling and building yourself
 
