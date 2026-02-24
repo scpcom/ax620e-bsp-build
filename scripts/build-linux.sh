@@ -12,7 +12,10 @@ if [ "X$1" = "Xclean" ]; then
   exit 0
 fi
 
+mkdir -p $KERNEL_OUTPUT_DIR
+
 cd linux
+git log -1 --format="%at" | xargs -I{} date -d @{} +%Y%m%d > $KERNEL_OUTPUT_DIR/.version
 if [ -e $PACK_INSTALL_DIR/initramfs_rootfs.cpio ]; then
   sed -i 's|^CONFIG_INITRAMFS_SOURCE=.*|CONFIG_INITRAMFS_SOURCE="../../../install/'${BOARD_DTS}'/initramfs_rootfs.cpio"|g' arch/${KERNEL_ARCH}/configs/${KERNEL_CFG}
 else
