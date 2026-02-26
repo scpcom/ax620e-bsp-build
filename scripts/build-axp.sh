@@ -4,9 +4,12 @@
 AXP_OUTPUT_DIR=$PACK_OUTPUT_DIR/axp
 AXP_XML=${BOARD_BIN}/AX630C_emmc_arm64_k419.xml
 
+AXP_PREFIX=AX630C_emmc
+[ "${BOARD_FAMILY}" != "ax620e_Qnand" ] || AXP_PREFIX=AX620Q_nand
+
 mkdir -p "${AXP_OUTPUT_DIR}"
 
-for f in ${BOARD_BIN}/AX630C_emmc_*.xml ; do
+for f in ${BOARD_BIN}/${AXP_PREFIX}_*.xml ; do
   [ -e $f ] || continue
   AXP_XML=$f
   cp -p "${AXP_XML}" "${AXP_OUTPUT_DIR}/"
@@ -33,6 +36,8 @@ grep '<File>' "${AXP_XML}"  | cut -d '>' -f 2- | cut -d '<' -f 1 | while read f 
     e=logo.img
   elif echo $f | grep -q -E '^optee' ; then
     e=optee.img
+  elif echo $f | grep -q -E '^param.ubi' ; then
+    e=param.img
   elif echo $f | grep -q -E '\.dtb' ; then
     e=dtb.img
   elif echo $f | grep -q -E '^kernel|^boot_signed.bin' ; then
