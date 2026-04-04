@@ -26,7 +26,7 @@ CROSS_COMPILE=aarch64-none-linux-gnu-
 
 export PATH=$CROSS_COMPILE_PATH/bin:$PATH
 
-ax620e_emmc_blkdevparts="
+ax630c_emmc_blkdevparts="
 768K(spl)
 512K(ddrinit)
 256K(atf)
@@ -44,7 +44,18 @@ ax620e_emmc_blkdevparts="
 64M(kernel_b)
 128M(boot)"
 
-ax620e_Qnand_blkdevparts="
+ax620q_emmc_blkdevparts="
+768K(spl)
+512K(ddrinit)
+1536K(uboot)
+1536K(uboot_b)
+1M(env)
+6M(logo)
+1M(dtb)
+64M(kernel)
+128M(boot)"
+
+ax620q_Qnand_blkdevparts="
 1M(spl)
 512K(ddrinit)
 1M(uboot)
@@ -53,5 +64,6 @@ ax620e_Qnand_blkdevparts="
 512K(dtb)
 6M(kernel)"
 
-blkdevparts=$ax620e_emmc_blkdevparts
-[ "${BOARD_FAMILY}" != "ax620e_Qnand" ] || blkdevparts=$ax620e_Qnand_blkdevparts
+blkdevparts=$ax630c_emmc_blkdevparts
+[ "${BOARD_CHIP}-${BOARD_FAMILY}" != "ax620q-ax620e_emmc"  ] || blkdevparts=$ax620q_emmc_blkdevparts
+[ "${BOARD_CHIP}-${BOARD_FAMILY}" != "ax620q-ax620e_Qnand" ] || blkdevparts=$ax620q_Qnand_blkdevparts
