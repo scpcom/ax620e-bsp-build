@@ -97,8 +97,8 @@ done
 ./scripts/ax_pack_dtb.sh ${BOARD_DTS}.dtb $dtbsize
 
 
-ax620e_emmc_blkdev="blkdevparts=mmcblk0"
-ax620e_emmc_blkimgs="spl.img
+ax630c_emmc_blkdev="blkdevparts=mmcblk0"
+ax630c_emmc_blkimgs="spl.img
 ddrinit.img
 atf.img
 atf.img
@@ -114,8 +114,17 @@ dtb.img
 kernel.img
 kernel.img"
 
-ax620e_Qnand_blkdev="mtdparts=spi4.0"
-ax620e_Qnand_blkimgs="spl.img
+ax620q_emmc_blkimgs="spl.img
+ddrinit.img
+uboot.bin
+uboot.bin
+env.bin
+logo.img
+dtb.img
+kernel.img"
+
+ax620q_Qnand_blkdev="mtdparts=spi4.0"
+ax620q_Qnand_blkimgs="spl.img
 ddrinit.img
 uboot.bin
 env.bin
@@ -123,12 +132,13 @@ param.img
 dtb.img
 kernel.img"
 
-blkdev=$ax620e_emmc_blkdev
-blkimgs=$ax620e_emmc_blkimgs
+blkdev=$ax630c_emmc_blkdev
+blkimgs=$ax630c_emmc_blkimgs
 LIP_IMAGE_FILE=${PACK_INSTALL_DIR}/emmc.img
-[ "${BOARD_FAMILY}" != "ax620e_Qnand" ] || blkdev=$ax620e_Qnand_blkdev
-[ "${BOARD_FAMILY}" != "ax620e_Qnand" ] || blkimgs=$ax620e_Qnand_blkimgs
-[ "${BOARD_FAMILY}" != "ax620e_Qnand" ] || LIP_IMAGE_FILE=${PACK_INSTALL_DIR}/nand.img
+[ "${BOARD_CHIP}-${BOARD_FAMILY}" != "ax620q-ax620e_emmc"  ] || blkimgs=$ax620q_emmc_blkimgs
+[ "${BOARD_CHIP}-${BOARD_FAMILY}" != "ax620q-ax620e_Qnand" ] || blkdev=$ax620q_Qnand_blkdev
+[ "${BOARD_CHIP}-${BOARD_FAMILY}" != "ax620q-ax620e_Qnand" ] || blkimgs=$ax620q_Qnand_blkimgs
+[ "${BOARD_CHIP}-${BOARD_FAMILY}" != "ax620q-ax620e_Qnand" ] || LIP_IMAGE_FILE=${PACK_INSTALL_DIR}/nand.img
 
 rm -f ${LIP_IMAGE_FILE}
 touch ${LIP_IMAGE_FILE}
